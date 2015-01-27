@@ -40,11 +40,11 @@ cd linux-3.14.17
 cat /boot/config-`uname -r` | python /vagrant/kernelconfigpatcher.py /vagrant/configchanges.txt
 
 #Take the original configuration from Ubuntu
-CONCURRENCY_LEVEL=7 fakeroot make-kpkg --bzimage --initrd --append-to-version=-xenomai-2.6.2.1  --config defconfig kernel-image kernel-headers modules
+CONCURRENCY_LEVEL=7 fakeroot make-kpkg --bzimage --initrd --append-to-version=-xenomai-2.6.4  --config defconfig kernel-image kernel-headers modules
 cd ..
 dpkg -i linux-image-*.deb
 dpkg -i linux-headers-*.deb
 
-update-initramfs -c -k "3.14.17-xenomai-2.6.2.1-ipipe"
+update-initramfs -c -k "3.14.17-xenomai-2.6.4-ipipe"
 update-grub
 
