@@ -58,7 +58,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :reload  
   config.vm.provision :shell, path: "bootstrapXenomaiP3.sh"
 #  config.vm.provision :shell, path: "bootstrapRTnet.sh"
-  config.vm.provision :shell, path: "bootstrapROS.sh"
+  config.vm.provision :shell, path: "bootstrapROS_1204_Hydro.sh"
 #  config.vm.provision :shell, path: "bootstrapOrocos.sh"
 
   #
