@@ -85,4 +85,6 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+  config.vm.synced_folder "/Users/eruffaldi/Dropbox/REMEDIme/ros_haptics/", "/ros_haptic"
+  config.vm.synced_folder "/Users/eruffaldi/Documents/VMs", "/vms"
 end
