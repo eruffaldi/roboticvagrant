@@ -53,14 +53,14 @@ Vagrant.configure(2) do |config|
   #config.vbguest.no_remote = true
 
   config.vm.provision :shell, path: "bootstrapGCC.sh"
-  config.vm.provision :shell, path: "bootstrapXenomaiP1.sh"
-  config.vm.provision :reload
-  config.vm.provision :shell, path: "bootstrapXenomaiP2.sh"
+  #config.vm.provision :shell, path: "bootstrapXenomaiP1.sh"
+  #config.vm.provision :reload
+  #config.vm.provision :shell, path: "bootstrapXenomaiP2.sh"
   # the following also reload invokes vbguest
   config.vm.provision :reload  
-  config.vm.provision :shell, path: "bootstrapXenomaiP3.sh"
+  #config.vm.provision :shell, path: "bootstrapXenomaiP3.sh"
 #  config.vm.provision :shell, path: "bootstrapRTnet.sh"
-  config.vm.provision :shell, path: "bootstrapROS_1204_Hydro.sh"
+  config.vm.provision :shell, path: "bootstrapROS_1404_Indigo.sh"
 #  config.vm.provision :shell, path: "bootstrapOrocos.sh"
 
   #
