@@ -48,7 +48,7 @@ cd linux-${KERNELVER}
 ../${XENOMAIVER}/scripts/prepare-kernel.sh --arch=${ARCHXENO} --ipipe ../${XENOMAIVER}/kernel/cobalt/arch/x86/patches/ipipe-core-${XENOMAIVER}-x86-${XENOPATCH}.patch --linux=.
 
 #sudo cp -vi /boot/config-`uname -r` .config
-cat /boot/config-`uname -r` | python /vagrant/patchconfig.py /vagrant/configchanges.txt
+cat /boot/config-`uname -r` | python patchconfig.py configchanges.txt
 
 #Take the original configuration from Ubuntu
 CONCURRENCY_LEVEL=7 fakeroot make-kpkg --bzimage --initrd --append-to-version=-xenomai-${XENOMAIVER}  --config defconfig kernel-image kernel-headers modules
