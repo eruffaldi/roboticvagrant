@@ -16,7 +16,12 @@
 # 		CONFIG_VIRTUALIZATION is not set
 
 #See http://www.stanley.gatech.edu/skelly/uncategorized/installing-xenomai-on-ubuntu-12-04/
-
+XENOMAIVER=3.0.3
+KERNELVER=3.14.17
+KERENLFAM=3.x
+ARCH=x86
+ARCHXENO=amd64
+PATCHVER=4
 mkdir newkernel
 cd newkernel
 
@@ -24,27 +29,27 @@ apt-get install fakeroot kernel-package
 apt-get install build-essential crash kexec-tools kernel-wedge git-core libncurses5 libncurses5-dev libelf-dev binutils-dev 
 apt-get install devscripts debhelper dh-kpatches autotools-dev autoconf automake libtool libncurses5-dev
 
-wget -O - http://download.gna.org/xenomai/stable/xenomai-2.6.4.tar.bz2| tar -jxf -
-cd xenomai-2.6.4
-DEBEMAIL="emanuele.ruffaldi@sssup.it" DEBFULLNAME="Emanuele Ruffaldi" debchange -v 2.6.4 Release 2.6.4
+wget -O - https://xenomai.org/downloads/xenomai/stable/latest/xenomai-${XENOMAIVER}.tar.bz2| tar -jxf -
+cd xenomai-${XENOMAIVER}
+DEBEMAIL="emanuele.ruffaldi@sssup.it" DEBFULLNAME="Emanuele Ruffaldi" debchange -v ${XENOMAIVER} Release ${XENOMAIVER}
 debuild -uc -us
 dpkg -i ../*.deb
 cd ..
-wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.17.tar.gz
-tar -zxf linux-3.14.17.tar.gz
-cd linux-3.14.17
+wget https://www.kernel.org/pub/linux/kernel/v${KERENLFAM}/linux-${KERNELVER}.tar.gz
+tar -zxf linux-${KERNELVER}.tar.gz
+cd linux-${KERNELVER}
 
-../xenomai-2.6.4/scripts/prepare-kernel.sh --arch=amd64 --adeos=../xenomai-2.6.4/ksrc/arch/x86/patches/ipipe-core-3.14.17-x86-4.patch --linux=.
+../${XENOMAIVER}/scripts/prepare-kernel.sh --arch=${ARCHXENO} --adeos=../xenomai-${XENOMAIVER}/ksrc/arch/${ARCH}/patches/ipipe-core-${KERNELVER}-${ARCH}-${PATCHVER}.patch --linux=.
 
 #sudo cp -vi /boot/config-`uname -r` .config
 cat /boot/config-`uname -r` | python /vagrant/kernelconfigpatcher.py /vagrant/configchanges.txt
 
 #Take the original configuration from Ubuntu
-CONCURRENCY_LEVEL=7 fakeroot make-kpkg --bzimage --initrd --append-to-version=-xenomai-2.6.4  --config defconfig kernel-image kernel-headers modules
+CONCURRENCY_LEVEL=7 fakeroot make-kpkg --bzimage --initrd --append-to-version=-xenomai-${XENOMAIVER}  --config defconfig kernel-image kernel-headers modules
 cd ..
 dpkg -i linux-image-*.deb
 dpkg -i linux-headers-*.deb
 
-update-initramfs -c -k "3.14.17-xenomai-2.6.4-ipipe"
+update-initramfs -c -k "${KERNELVER}-xenomai-${XENOMAIVER}-ipipe"
 update-grub
 

@@ -5,8 +5,8 @@
 cd newkernel
 mkdir buildxenomai
 cd buildxenomai
-rm ../xenomai-2.6.4/config.status 
-../xenomai-2.6.4/configure --enable-shared --enable-smp --enable-x86-sep
+rm ../xenomai-${XENOMAIVR}/config.status 
+../xenomai-${XENOMAIVR}/configure --enable-shared --enable-smp --enable-x86-sep
 #Was --enable-x86-tsc --enable-smp  --enable-posix-auto-mlockall --enable-dlopen-skins --enable-x86-sep
 # --enable-posix-auto-mlockall --enable-dlopen-skins --enable-x86-sep
 make -j8
