@@ -16,7 +16,7 @@
 # 		CONFIG_VIRTUALIZATION is not set
 
 #See http://www.stanley.gatech.edu/skelly/uncategorized/installing-xenomai-on-ubuntu-12-04/
-XENOMAIVER=3.0.3
+XENOMAIVER=2.6.4
 KERNELVER=3.14.17
 KERENLFAM=3.x
 ARCH=x86
